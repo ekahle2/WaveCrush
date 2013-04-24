@@ -43,7 +43,7 @@ class WeaponFire
     
   } 
   
-  WeaponFire(float _x, float _y, PVector _target)
+  WeaponFire(float _x, float _y, PVector _target, int _damage)
   {
     actorW = actorH = 50;
     
@@ -65,6 +65,8 @@ class WeaponFire
     lifeStart = millis();
     
     updateTarget(_target);
+    
+    damage = _damage;
     
   }   
   

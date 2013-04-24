@@ -230,6 +230,7 @@ class Actor
         if( wfm.wfCollision( lookup ) > 0 )
         {
           doCollision(i,j);
+          println("Damage Done: " + wfm.wfCollision( lookup ));
         }
       }
       

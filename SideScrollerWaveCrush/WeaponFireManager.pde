@@ -35,13 +35,16 @@ class WeaponFireManager
       
       //collisionMap[ int( width * 10 + 10) ] = 255;
       
+
+      
+      
       for(int j = (int)wp.posX; j <= (int)(wp.posX+wp.actorW) ;  j++)
       {
         if(j > width)continue;
         int index = int( height * wp.posY + j);
         if( !(index > collisionMap.length-1 || index < 0 ))
         {
-          collisionMap[ index ] = 255;
+          collisionMap[ index ] = wp.damage;
         }
       }
 
@@ -50,7 +53,18 @@ class WeaponFireManager
       if( !wp.isAlive())
       {
       weaponFireCollection.remove(i);
-        
+        continue;
+      }
+      
+      for(int j = 0 ; j < aList.size() ; j++)
+      {
+          EnemyType1 ai = (EnemyType1)aList.get(j);
+          if(ai.collisionCheck(wp.posX, wp.posY , ai.getRadius() ))
+          {
+          weaponFireCollection.remove(i);
+          break;
+          }
+          
       }
       
       
