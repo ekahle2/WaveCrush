@@ -22,6 +22,9 @@ class Player extends Actor
 
   private void updatePosition()
   {
+    
+    super.updatePosition();
+    if(timer%100==0)println(timer + "here");
    
     if(time<duration){
       posX = Linear.easeIn(time, beginningVec.x, changeVec.x, duration );
@@ -43,8 +46,13 @@ class Player extends Actor
   {
     updatePosition();
     super.draw();
-    image(playerImg, getCenter().x - (playerImg.width/2),getCenter().y - (playerImg.height/2));
+    //image(playerImg, getCenter().x - (playerImg.width/2),getCenter().y - (playerImg.height/2));
     
+//    pushStyle();
+//    fill(200,100);
+//    ellipse(posX,posY,50,50);
+//    popStyle();
+    if(true)image(playerImg, int(posX - (playerImg.width/2) ), int(posY- (playerImg.height/2) ) );
 
   }
 
@@ -54,7 +62,7 @@ class Player extends Actor
     if(!super.addWeponFire())return false;
     
     PVector pos = getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(width, pos.y)  ) );
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2), pos.y + (actorH/2), new PVector(width, pos.y + (actorH/2))  ) );
     
     return true;
   }

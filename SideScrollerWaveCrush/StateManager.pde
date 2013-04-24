@@ -62,6 +62,7 @@ class StateManager
         text(collisionCount, 50,50);
         text(frameRate, 50,75);
         text(timer, 50,100);
+        text(""+a.hasCollided, 50,125);
         
         timer++;//global timer
         

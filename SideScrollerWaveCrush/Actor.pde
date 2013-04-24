@@ -86,7 +86,7 @@ class Actor
   
   public PVector getCenter()
   {
-    return new PVector( posX+ (actorW/2), posY+ (actorH/2) );      
+    return new PVector( posX,posY );      
   }
   
   public PVector getSize()
@@ -202,6 +202,49 @@ class Actor
 
     //weapon fire collision handler
     
+     if(hasCollided && (colisionTimer < colisionAnimationTimeLimit) )
+    {
+      pushStyle();
+      ps.addParticle();
+      ps.run();
+      popStyle();
+      colisionTimer++;
+      return;
+    }
+
+    
+    PVector lookup = new PVector();
+    
+//    pushStyle();
+//    fill(200,100);
+//    ellipse(posX,posY,50,50);
+//    popStyle();    
+    
+    for(int i = (int)(posX - (actorW/2) ) ; i <= (int)(posX + (actorW/2) ) ; i++)
+    {
+      if(hasCollided)break;
+      for(int j = (int)(posY- (actorH/2) ) ; j <= (int)(posY + (actorH/2) ) ; j++)
+      {
+        if(hasCollided)break;
+        lookup.set(j,i,0);
+        if( wfm.wfCollision( lookup ) > 0 )
+        {
+          hasCollided = true;
+          
+          statusCol = color(255,0,0);
+          ps.origin = new PVector(i,j);
+        }
+      }
+      
+    }
+    
+    if(hasCollided)
+    {
+      colisionTimer++;
+    }
+    
+    
+    
   }  
   
   void draw()
@@ -217,7 +260,10 @@ class Actor
   boolean collisionCheck(float _x, float _y, float _radius)
   {
     PVector center = getCenter();
-    
+//    pushStyle();
+//    fill(200,10);
+//    ellipse(center.x,center.y,50,50);
+//    popStyle();  
     if( inCircle( center.x , center.y , (actorW >= actorH ? actorW:actorH)     ,_x,_y  ) )
     {
       return true;

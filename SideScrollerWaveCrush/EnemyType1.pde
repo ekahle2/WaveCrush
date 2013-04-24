@@ -24,15 +24,17 @@ class EnemyType1 extends Actor
   private void updatePosition()
   {
    
-    if(hasCollided && (colisionTimer < colisionAnimationTimeLimit) )
-    {
-      pushStyle();
-      ps.addParticle();
-      ps.run();
-      popStyle();
-      colisionTimer++;
-      return;
-    }
+    super.updatePosition();
+    
+//    if(hasCollided && (colisionTimer < colisionAnimationTimeLimit) )
+//    {
+//      pushStyle();
+//      ps.addParticle();
+//      ps.run();
+//      popStyle();
+//      colisionTimer++;
+//      return;
+//    }
     if(hasCollided && (colisionTimer > colisionAnimationTimeLimit) )
     {
       
@@ -50,30 +52,30 @@ class EnemyType1 extends Actor
       resetEnemy();
     }
     
-    PVector cen = this.getCenter();
-    PVector lookup = new PVector();
-    for(int i = (int)(cen.x- (actorW/2) ) ; i <= (int)(cen.x + (actorW/2) ) ; i++)
-    {
-      if(hasCollided)break;
-      for(int j = (int)(cen.y- (actorH/2) ) ; j <= (int)(cen.y + (actorH/2) ) ; j++)
-      {
-        if(hasCollided)break;
-        lookup.set(j,i,0);
-        if( wfm.wfCollision( lookup ) > 0 )
-        {
-          hasCollided = true;
-          
-          statusCol = color(255,0,0);
-          ps.origin = new PVector(i,j);
-        }
-      }
-      
-    }
+//    PVector cen = this.getCenter();
+//    PVector lookup = new PVector();
+//    for(int i = (int)(cen.x- (actorW/2) ) ; i <= (int)(cen.x + (actorW/2) ) ; i++)
+//    {
+//      if(hasCollided)break;
+//      for(int j = (int)(cen.y- (actorH/2) ) ; j <= (int)(cen.y + (actorH/2) ) ; j++)
+//      {
+//        if(hasCollided)break;
+//        lookup.set(j,i,0);
+//        if( wfm.wfCollision( lookup ) > 0 )
+//        {
+//          hasCollided = true;
+//          
+//          statusCol = color(255,0,0);
+//          ps.origin = new PVector(i,j);
+//        }
+//      }
+//      
+//    }
     
-    if(hasCollided)
-    {
-      colisionTimer++;
-    }
+//    if(hasCollided)
+//    {
+//      colisionTimer++;
+//    }
     
     
 
@@ -95,11 +97,13 @@ class EnemyType1 extends Actor
   {
     updatePosition();
     super.draw();
-    //image(playerImg, getCenter().x - (playerImg.width/2),getCenter().y - (playerImg.height/2));
     pushStyle();
-    //fill(statusCol);
-    //if(!hasCollided)rect(posX,posY,actorW,actorH);
-    if(!hasCollided)image(EnemyType1Img, int(posX + (actorW/2)), int(posY + (actorH/2)) );
+    
+//    pushStyle();
+//    fill(200,100);
+//    ellipse(posX,posY,50,50);
+//    popStyle();
+    if(!hasCollided)image(EnemyType1Img, int(posX - (EnemyType1Img.width/2) ), int(posY- (EnemyType1Img.height/2) ) );
     
     popStyle();
 
@@ -110,7 +114,7 @@ class EnemyType1 extends Actor
     if(!super.addWeponFire())return false;
     
     PVector pos = getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(0, pos.y)  ) );
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2), pos.y + (actorH/2), new PVector(width, pos.y + (actorH/2))  ) );
     
     return true;
   }
