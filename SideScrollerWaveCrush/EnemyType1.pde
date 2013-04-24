@@ -87,10 +87,7 @@ class EnemyType1 extends Actor
       float seedY = random(10,height-10);
       updatePosition(width, seedY);
       updateTarget(new PVector( -this.actorW ,seedY+(getSize().y/2)));
-      hasCollided = false;
-      statusCol = color(255,255,255);
-      colisionTimer = 0;
-      ps.particles.clear();
+      resetCollision();
   }
   
   void draw()

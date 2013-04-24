@@ -52,6 +52,12 @@ class StateManager
           if( !ai.hasCollided && a.collisionCheck(pos.x, pos.y , ai.getRadius() ) )
           {
             collisionCount++;
+            //trigger player colision 
+            a.doCollision();
+            
+            //a.hasCollided = true;
+            //a.ps.origin = a.getCenter();
+            
             ai.hasCollided = true;
             ai.ps.origin = new PVector(pos.x, pos.y);
           }

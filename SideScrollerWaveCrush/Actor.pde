@@ -229,10 +229,7 @@ class Actor
         lookup.set(j,i,0);
         if( wfm.wfCollision( lookup ) > 0 )
         {
-          hasCollided = true;
-          
-          statusCol = color(255,0,0);
-          ps.origin = new PVector(i,j);
+          doCollision(i,j);
         }
       }
       
@@ -272,6 +269,27 @@ class Actor
     return false;
   
   }
+  
+  void doCollision(int _i, int _j)
+  {
+    hasCollided = true;
+    ps.origin = new PVector(_i,_j);
+    statusCol = color(255,0,0);//deprecated
+  }
+  
+  void doCollision()
+  {
+    hasCollided = true;
+    ps.origin = getCenter();
+    statusCol = color(255,0,0);//deprecated
+  } 
+  void resetCollision()
+  {
+    hasCollided = false;
+    statusCol = color(255,255,255);//deprecated
+    colisionTimer = 0;
+    ps.particles.clear();
+  } 
   
   boolean addWeponFire()
   {

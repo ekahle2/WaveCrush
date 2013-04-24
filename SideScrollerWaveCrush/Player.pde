@@ -12,6 +12,7 @@ class Player extends Actor
     actorW = playerImg.width;
     actorH = playerImg.height;
     weaponFireRate = 50;
+    //colisionAnimationTimeLimit = 1000;
   }
 
   Player(float _x, float _y, int _duration, boolean _ai)
@@ -24,7 +25,10 @@ class Player extends Actor
   {
     
     super.updatePosition();
-    if(timer%100==0)println(timer + "here");
+    if(hasCollided && (colisionTimer > colisionAnimationTimeLimit) )
+    {
+      resetCollision();
+    }
    
     if(time<duration){
       posX = Linear.easeIn(time, beginningVec.x, changeVec.x, duration );
