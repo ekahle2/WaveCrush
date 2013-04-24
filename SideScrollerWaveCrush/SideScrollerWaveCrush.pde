@@ -49,7 +49,7 @@ void setup()
   a = new Player();
 
 
-  for(int i = 0 ; i < 15 ; i++)
+  for(int i = 0 ; i < 7 ; i++)
   {
     float seedY = random(10,height-10);
     

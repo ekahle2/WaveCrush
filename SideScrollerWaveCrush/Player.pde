@@ -11,14 +11,16 @@ class Player extends Actor
     duration = 25;
     actorW = playerImg.width;
     actorH = playerImg.height;
-    weaponFireRate = 50;
+    weaponFireRate = 25;
     //colisionAnimationTimeLimit = 1000;
+    actorHealth  = 10;
+    actorCurrentHealth = actorHealth;
   }
 
   Player(float _x, float _y, int _duration, boolean _ai)
   {
-    super(_x, _y, _duration, _ai, 50);
-    
+    super(_x, _y, _duration, _ai, 25,10);
+
   }
 
   private void updatePosition()

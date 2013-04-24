@@ -62,6 +62,7 @@ class WeaponFireManager
           if(ai.collisionCheck(wp.posX, wp.posY , ai.getRadius() ))
           {
           weaponFireCollection.remove(i);
+          println("removed at: " +millis());
           break;
           }
           

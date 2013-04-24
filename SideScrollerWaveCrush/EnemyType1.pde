@@ -11,13 +11,14 @@ class EnemyType1 extends Actor
     duration = 25;
     actorW = EnemyType1Img.width;
     actorH = EnemyType1Img.height;
-    weaponFireRate = 50;
-    
+    weaponFireRate = 25;
+    actorHealth  = 20;
+    actorCurrentHealth = actorHealth;
   }
 
   EnemyType1(float _x, float _y, int _duration, boolean _ai)
   {
-    super(_x, _y, _duration, _ai, 50 );
+    super(_x, _y, _duration, _ai, 25,20 );
     
   }
 
@@ -35,7 +36,7 @@ class EnemyType1 extends Actor
 //      colisionTimer++;
 //      return;
 //    }
-    if(hasCollided && (colisionTimer > colisionAnimationTimeLimit) )
+    if((actorCurrentHealth <= 0) && (colisionTimer > colisionAnimationTimeLimit) )
     {
       
     
@@ -100,7 +101,7 @@ class EnemyType1 extends Actor
 //    fill(200,100);
 //    ellipse(posX,posY,50,50);
 //    popStyle();
-    if(!hasCollided)image(EnemyType1Img, int(posX - (EnemyType1Img.width/2) ), int(posY- (EnemyType1Img.height/2) ) );
+    if((actorCurrentHealth > 0))image(EnemyType1Img, int(posX - (EnemyType1Img.width/2) ), int(posY- (EnemyType1Img.height/2) ) );
     
     popStyle();
 

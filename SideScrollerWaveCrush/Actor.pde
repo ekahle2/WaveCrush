@@ -28,6 +28,9 @@ class Actor
   int weaponFireRate;
   long lastWeaponFire; 
   
+  int actorHealth;
+  int actorCurrentHealth;
+  
   Actor()
   {
     actorW = actorH = 50;
@@ -54,9 +57,12 @@ class Actor
     moveSpeed = 3;
     weaponFireRate = 100;
     lastWeaponFire = 0;
+    
+    actorHealth = 10;
+    actorCurrentHealth = actorHealth;
   }
   
-  Actor(float _x, float _y, int _duration, boolean _ai, int _weaponFireRate)
+  Actor(float _x, float _y, int _duration, boolean _ai, int _weaponFireRate, int _actorHealth)
   {
     actorW = actorH = 50;
     
@@ -82,6 +88,8 @@ class Actor
     weaponFireRate = _weaponFireRate;
     lastWeaponFire = 0;
     
+    actorHealth  = _actorHealth;
+    actorCurrentHealth = actorHealth;
   }  
   
   public PVector getCenter()
@@ -219,19 +227,36 @@ class Actor
 //    fill(200,100);
 //    ellipse(posX,posY,50,50);
 //    popStyle();    
-    
+    boolean isHit = false;
     for(int i = (int)(posX - (actorW/2) ) ; i <= (int)(posX + (actorW/2) ) ; i++)
     {
-      if(hasCollided)break;
+      if(hasCollided ||isHit)break;
       for(int j = (int)(posY- (actorH/2) ) ; j <= (int)(posY + (actorH/2) ) ; j++)
       {
-        if(hasCollided)break;
+        if(hasCollided ||isHit)break;
         lookup.set(j,i,0);
         if( wfm.wfCollision( lookup ) > 0 )
         {
+          //hasCollided = true;
+          actorCurrentHealth -=wfm.wfCollision( lookup );
+          println("hit, health@ " + actorCurrentHealth );
           doCollision(i,j);
-          println("Damage Done: " + wfm.wfCollision( lookup ));
+          if(actorCurrentHealth <=0){
+            
+            println();
+          }
+//          
+//          //doCollision(i,j);
+//          println("hit: " + millis());
+//        
+//          
+//          isHit = true;
+//          println(actorHealth + " " + actorCurrentHealth);
+//
+//          
+          
         }
+        
       }
       
     }
@@ -247,10 +272,7 @@ class Actor
   
   void draw()
   {
-    //updatePosition();
-    
-    //fill(255);
-    //rect(posX,posY,actorW,actorH);
+
     
     time++;
   }
@@ -290,6 +312,8 @@ class Actor
     statusCol = color(255,255,255);//deprecated
     colisionTimer = 0;
     ps.particles.clear();
+    
+    actorCurrentHealth = actorHealth;
   } 
   
   boolean addWeponFire()
