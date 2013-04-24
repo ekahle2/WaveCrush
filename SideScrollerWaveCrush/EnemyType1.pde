@@ -11,12 +11,14 @@ class EnemyType1 extends Actor
     duration = 25;
     actorW = EnemyType1Img.width;
     actorH = EnemyType1Img.height;
+    weaponFireRate = 50;
     
   }
 
   EnemyType1(float _x, float _y, int _duration, boolean _ai)
   {
-    super(_x, _y, _duration, _ai);
+    super(_x, _y, _duration, _ai, 50 );
+    
   }
 
   private void updatePosition()
@@ -72,7 +74,6 @@ class EnemyType1 extends Actor
         {
           hasCollided = true;
           
-          println(true);
           statusCol = color(255,0,0);
           ps.origin = new PVector(i,j);
         }
@@ -118,5 +119,17 @@ class EnemyType1 extends Actor
     popStyle();
 
   }
+  
+  boolean addWeponFire()
+  {
+    if(!super.addWeponFire())return false;
+    
+    PVector pos = getCenter();
+    wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(0, pos.y)  ) );
+    
+    return true;
+  }
+  
+
 
 }

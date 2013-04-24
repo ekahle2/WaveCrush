@@ -11,12 +11,13 @@ class Player extends Actor
     duration = 25;
     actorW = playerImg.width;
     actorH = playerImg.height;
-    
+    weaponFireRate = 50;
   }
 
   Player(float _x, float _y, int _duration, boolean _ai)
   {
-    super(_x, _y, _duration, _ai);
+    super(_x, _y, _duration, _ai, 50);
+    
   }
 
   private void updatePosition()
@@ -48,10 +49,15 @@ class Player extends Actor
   }
 
 
-  void addWeponFire()
+  boolean addWeponFire()
   {
+    if(!super.addWeponFire())return false;
+    
     PVector pos = getCenter();
     wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(width, pos.y)  ) );
+    
+    return true;
   }
+
 
 }

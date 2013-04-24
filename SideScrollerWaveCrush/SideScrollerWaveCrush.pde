@@ -20,11 +20,12 @@ PImage tempI;
 BackgroundManager BM;
 
 float moveSpeed = 3;
-boolean[] dPadMovement = new boolean[4];
+boolean[] dPadMovement = new boolean[5];
 //0 - LEFT
 //1 - RIGHT
 //2 - UP
 //3 - DOWN
+//4 - FIRE
 
 StateManager stateManager;
 
@@ -69,62 +70,6 @@ void draw()
   
   stateManager.go();
   
-  BM.draw();
-  
-  
-  
-  if(mousePressed){
-    PVector pos = a.getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(width, pos.y)  ) );
-  }
-  
-  if (dPadMovement[0]) {
-      a.moveLeft();
-  }
-  
-  if (dPadMovement[1]) {
-      a.moveRight();
-  } 
- 
-  if (dPadMovement[2]) {
-      a.moveUp();
-  } 
-
-  if (dPadMovement[3]) {
-      a.moveDown();
-  }  
-  
-  a.draw();
-  
-  for(int i = 0 ; i < aList.size() -1 ; i++)
-  {
-    Actor ai = (Actor)aList.get(i);
-    ai.draw();
-    
-    PVector pos = ai.getCenter();
-    //ellipse(pos.x, pos.y , ai.getRadius(), ai.getRadius());
-    if( !ai.hasCollided && a.collisionCheck(pos.x, pos.y , ai.getRadius() ) )
-    {
-      collisionCount++;
-      ai.hasCollided = true;
-      ai.ps.origin = new PVector(pos.x, pos.y);
-    }
-  }
-  
-  wfm.draw();
-  
-  text(collisionCount, 50,50);
-  text(frameRate, 50,75);
-  text(timer, 50,100);
-  timer++;//global timer
-  
-  
-  //debug to see colision events 
-  //tempI.pixels = wfm.collisionMap;
-  //tempI.updatePixels();
-  //image(tempI,0,0);
-  
-
 }
 
 void keyPressed() 
@@ -143,14 +88,13 @@ void keyPressed()
       dPadMovement[3] = true;
     }    
     
+    //trigger player weapon on spacebar  
+    if(key== ' ')
+    {
+      dPadMovement[4] = true;
   
-  //trigger player weapon on spacebar  
-  if(key== ' ')
-  {
-    PVector pos = a.getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(width, pos.y)  ) );
-
-  }
+  
+    }
 
 }
 
@@ -168,13 +112,15 @@ void keyReleased()
     if (keyCode == DOWN) {
       dPadMovement[3] = false;
     }    
+    if (key== ' ') {
+      dPadMovement[4] = false;
+    }       
 
 }
 
 //void mousePressed()
 //{
-//  PVector pos = a.getCenter();
-//  wfm.addWeponFire(new WeaponFire( pos.x, pos.y, new PVector(width, pos.y)  ) );
+
 //}
 
 boolean inCircle(float _center_x, float _center_y, float _radius, float _x, float _y)

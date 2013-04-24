@@ -109,6 +109,11 @@ class StateManager
       if (dPadMovement[3]) {
           a.moveDown();
       } 
+ 
+      if (dPadMovement[4]) {
+          a.addWeponFire();
+      }
+      
   }
   
   //leave direct settor for now, I think proper way would be accessor methods for each state

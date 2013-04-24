@@ -25,6 +25,9 @@ class Actor
   int colisionAnimationTimeLimit;
   int colisionTimer;
   
+  int weaponFireRate;
+  long lastWeaponFire; 
+  
   Actor()
   {
     actorW = actorH = 50;
@@ -49,9 +52,11 @@ class Actor
     ps = new ParticleSystem(new PVector(width/2,height/2));
     
     moveSpeed = 3;
+    weaponFireRate = 100;
+    lastWeaponFire = 0;
   }
   
-  Actor(float _x, float _y, int _duration, boolean _ai)
+  Actor(float _x, float _y, int _duration, boolean _ai, int _weaponFireRate)
   {
     actorW = actorH = 50;
     
@@ -73,6 +78,9 @@ class Actor
     ps = new ParticleSystem(new PVector(width/2,height/2));
     
     moveSpeed = 3;
+    
+    weaponFireRate = _weaponFireRate;
+    lastWeaponFire = 0;
     
   }  
   
@@ -234,6 +242,26 @@ class Actor
     return false;
   
   }
+  
+  boolean addWeponFire()
+  {
+    //limit actor wepon fire rate
+    if(timer - lastWeaponFire > weaponFireRate)
+    {
+      lastWeaponFire = timer;
+      return true;
+    }else
+    {
+      return false;
+    }
+
+  }
+  
+  void setWeaponFireRate(int _weaponFireRate)
+  {
+    weaponFireRate = _weaponFireRate;
+  }
+  
   
 class Particle {
   PVector location;
