@@ -57,19 +57,19 @@ class StateManager
           }
         }
       
-      wfm.draw();
-      
-      text(collisionCount, 50,50);
-      text(frameRate, 50,75);
-      text(timer, 50,100);
-      
-      timer++;//global timer
-      
-      
-      //debug to see colision events 
-      //tempI.pixels = wfm.collisionMap;
-      //tempI.updatePixels();
-      //image(tempI,0,0);
+        wfm.draw();
+        
+        text(collisionCount, 50,50);
+        text(frameRate, 50,75);
+        text(timer, 50,100);
+        
+        timer++;//global timer
+        
+        
+        //debug to see colision events 
+        //tempI.pixels = wfm.collisionMap;
+        //tempI.updatePixels();
+        //image(tempI,0,0);
 
       
       

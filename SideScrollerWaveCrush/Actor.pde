@@ -197,28 +197,12 @@ class Actor
     
   }
 
-//  private void updatePosition()
-//  {
-//   
-//    
-//    posX = Expo.easeInOut(time, beginningVec.x, changeVec.x, duration );
-//    posY = Expo.easeInOut(time, beginningVec.y, changeVec.y, duration );
-//    
-//    //posX = Elastic.easeInOut(time, beginningVec.x, changeVec.x, duration );
-//    //posY = Elastic.easeInOut(time, beginningVec.y, changeVec.y, duration );
-//    
-//    ellipse(renTarget.x ,renTarget.y ,10,10);
-//    ellipse(posX,posY,10,10);
-//    
-//    //line(posX, posY, target.x,target.y);
-//    
-//    if(ai && (time>duration) )
-//    {
-//      float seedY = random(10,height-10);
-//      updatePosition(width, seedY);
-//      updateTarget(new PVector( -this.actorW ,seedY+(getSize().y/2)));
-//    }
-//  }  
+  private void updatePosition()
+  {
+
+    //weapon fire collision handler
+    
+  }  
   
   void draw()
   {

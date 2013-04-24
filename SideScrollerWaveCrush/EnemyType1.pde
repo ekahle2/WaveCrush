@@ -43,21 +43,10 @@ class EnemyType1 extends Actor
     if(!hasCollided || (time<duration)){
       posX = Expo.easeInOut(time, beginningVec.x, changeVec.x, duration );
       posY = Expo.easeInOut(time, beginningVec.y, changeVec.y, duration );
-      //println( time + " " + duration);
-      
-      //ellipse(renTarget.x ,renTarget.y ,10,10);
-      //ellipse(posX,posY,10,10);
-      
     }
     
     if(ai && (time>duration) )
     {
-//      float seedY = random(10,height-10);
-//      updatePosition(width, seedY);
-//      updateTarget(new PVector( -this.actorW ,seedY+(getSize().y/2)));
-//      hasCollided = false;
-//      statusCol = color(255,255,255);
-//      colisionTimer = 0;
       resetEnemy();
     }
     
@@ -87,11 +76,7 @@ class EnemyType1 extends Actor
     }
     
     
-//    if( wfm.wfCollision( this.getCenter() ) > 0 )
-//    {
-//      hasCollided = true;
-//      println(true);
-//    }
+
     
   }
   
