@@ -1,34 +1,41 @@
-//test
+
+/*
+  Import liberarys
+*/
+
 import processing.opengl.*;
 import penner.easing.*;
-
 import java.util.*;
-
-
 import java.util.Iterator;
 
-Player a;
-long timer = 0;
+/*
+  Init global varables
+*/
 
-ArrayList aList = new ArrayList();
-int collisionCount = 0;
+Player a;                            //player object 
+long timer = 0;                      //global timer
 
-WeaponFireManager wfm;
+ArrayList aList = new ArrayList();   //enemy actor list
+int collisionCount = 0;              //player collision count, used as debugging health meter
 
-PImage tempI;
+WeaponFireManager wfm;               //weapon fire manager, used to manage weapon sprites
 
-BackgroundManager BM;
+PImage tempI;                        //image used to debug weapon collision map                          
 
-float moveSpeed = 3;
-boolean[] dPadMovement = new boolean[5];
+BackgroundManager BM;                //manager to handel background rendering
+               
+boolean[] dPadMovement = new boolean[5];  //collection to manager simultanious keyboard events
 //0 - LEFT
 //1 - RIGHT
 //2 - UP
 //3 - DOWN
 //4 - FIRE
 
-StateManager stateManager;
+StateManager stateManager;          //state manager object
 
+/*
+  global setup method
+*/
 
 void setup()
 {
@@ -63,6 +70,9 @@ void setup()
 
 }
 
+/*
+  Main draw loop
+*/
 
 void draw()
 {
@@ -71,6 +81,10 @@ void draw()
   stateManager.go();
   
 }
+
+/*
+  Key Pressed Event Handeler
+*/
 
 void keyPressed() 
 {
@@ -98,6 +112,10 @@ void keyPressed()
 
 }
 
+/*
+  Key Released Event Handler
+*/
+
 void keyReleased()
 {
     if (keyCode == LEFT) {
@@ -123,6 +141,9 @@ void keyReleased()
 
 //}
 
+/*
+  Utility method to detect a point within a circle
+*/
 boolean inCircle(float _center_x, float _center_y, float _radius, float _x, float _y)
 {
 

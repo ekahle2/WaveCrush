@@ -66,7 +66,11 @@ class StateManager
       timer++;//global timer
       
       
-      
+      //debug to see colision events 
+      //tempI.pixels = wfm.collisionMap;
+      //tempI.updatePixels();
+      //image(tempI,0,0);
+
       
       
       break;//end play
