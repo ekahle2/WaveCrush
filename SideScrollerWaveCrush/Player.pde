@@ -67,9 +67,24 @@ class Player extends Actor
   {
     if(!super.addWeponFire())return false;
     
+    int fireLength = width;
     PVector pos = getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(width, pos.y + (actorH/2)), 10  ) );
-    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(width, 0), 10  ) );
+    
+    int angle = 0;
+    int endPointX = int(pos.x + (fireLength )*cos(radians(angle)));
+    int endPointY = int(pos.y + (fireLength )*sin(radians(angle)));
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(endPointX, endPointY ), 10,angle  ) );
+    
+    //TODO: determin fire angle
+    angle = -30;
+    endPointX = int(pos.x + (fireLength )*cos(radians(angle)));
+    endPointY = int(pos.y + (fireLength )*sin(radians(angle)));
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(endPointX, endPointY  ), 10 ,angle ) );
+    
+    angle = 30;
+    endPointX = int(pos.x + (fireLength )*cos(radians(angle)));
+    endPointY = int(pos.y + (fireLength )*sin(radians(angle)));
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(endPointX, endPointY  ), 10 ,angle ) );    
     return true;
   }
 

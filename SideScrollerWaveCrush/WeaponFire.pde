@@ -19,6 +19,8 @@ class WeaponFire
   int colisionAnimationTimeLimit;
   int colisionTimer;
   
+  float a;
+  
   WeaponFire(float _x, float _y)
   {
     actorW = actorH = 50;
@@ -71,7 +73,39 @@ class WeaponFire
     
     colisionAnimationTimeLimit = 30;
     colisionTimer = 0;
+    a = atan2(target.y -posY , target.x - posX);
+    println(radians(a));
+  } 
+
+  WeaponFire(float _x, float _y, PVector _target, int _damage,int _angle)
+  {
+    actorW = actorH = 50;
     
+    posX = _x;
+    posY = _y - (actorH/2);
+    
+    
+
+    duration = 50;
+
+    
+    target = _target;
+    renTarget = _target;
+    beginningVec= new PVector(posX,posY);
+    changeVec= new PVector();
+    
+    damage = 1;
+    lifeSpan = 1000;
+    lifeStart = millis();
+    
+    updateTarget(_target);
+    
+    damage = _damage;
+    
+    colisionAnimationTimeLimit = 30;
+    colisionTimer = 0;
+    a = radians(_angle);
+    println(radians(a));
   }   
   
   public PVector getCenter()
@@ -134,8 +168,11 @@ class WeaponFire
   {
    
     
-    posX = Expo.easeInOut(time, beginningVec.x, changeVec.x, duration );
-    posY = Expo.easeInOut(time, beginningVec.y, changeVec.y, duration );
+    posX = Linear.easeInOut(time, beginningVec.x, changeVec.x, duration );
+    posY = Linear.easeInOut(time, beginningVec.y, changeVec.y, duration );
+    
+    //posX = Expo.easeInOut(time, beginningVec.x, changeVec.x, duration );
+    //posY = Expo.easeInOut(time, beginningVec.y, changeVec.y, duration );
     
     //posX = Elastic.easeInOut(time, beginningVec.x, changeVec.x, duration );
     //posY = Elastic.easeInOut(time, beginningVec.y, changeVec.y, duration );
@@ -177,16 +214,16 @@ class WeaponFire
     //todo: rotate weapon fire based on angle
     pushMatrix();
       //translate(posX,posY);
-      translate(posX - actorW/2, posY - actorH/2);
-      float a = atan2(posY - prevPos.y, posX - prevPos.x);
+      translate(posX-5 , posY-5 );
+      
       //float a = atan2( posX - prevPos.x, posY - prevPos.y);
       
       rotate(a);
       //rect(0,0,100,100);
       //line(posX,posY,posX+50,posY);
-      line(0,0,50,0);
+      line(0,0,10,0);
       
-      translate(0,0);
+      //translate(0,0);
     popMatrix();
     
     popStyle();
