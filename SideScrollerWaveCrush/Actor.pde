@@ -227,7 +227,10 @@ class Actor
 //    fill(200,100);
 //    ellipse(posX,posY,50,50);
 //    popStyle();    
-    
+      
+      //deprecated at this point
+      //really good idea for efficant collision lookup
+      //bad use case
 //    for(int i = (int)(posX - (actorW/2) ) ; i <= (int)(posX + (actorW/2) ) ; i++)
 //    {
 //      if(hasCollided)break;

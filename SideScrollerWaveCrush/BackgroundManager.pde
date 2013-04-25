@@ -52,6 +52,11 @@ class BackgroundManager
    
   }
   
+  void doStaticBackground()
+  {
+    image(L1buffer,0,0);
+  }
+  
   void updateL1Background()
   {
     

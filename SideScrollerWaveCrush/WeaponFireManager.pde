@@ -37,7 +37,9 @@ class WeaponFireManager
       
 
       
-      
+      //deprecated at this point
+      //really good idea for efficant collision lookup
+      //bad use case
       for(int j = (int)wp.posX; j <= (int)(wp.posX+wp.actorW) ;  j++)
       {
         if(j > width)continue;
@@ -55,50 +57,33 @@ class WeaponFireManager
         weaponFireCollection.remove(i);
         continue;
       }
-      
-      boolean foundCollision = false;
-      
+      //the 'new' collision logic, may have issues at larger N
       for(int j = 0 ; j < aList.size() ; j++)
       {
           EnemyType1 ai = (EnemyType1)aList.get(j);
           if(ai.collisionCheck(wp.posX, wp.posY , ai.getRadius() ) )
           {
-          weaponFireCollection.remove(i);
-          
-          if( !ai.takeDamage( wp.damage ) )ai.doCollision();
-          
-          
-          println("removed at: " +millis());
-          foundCollision = true;
-          break;
+            wp.doCollion();
+            weaponFireCollection.remove(i);
+            if( !ai.takeDamage( wp.damage ) )ai.doCollision();
+            
+            break;
           }
           
       }
-      //if(foundCollision)continue;
-      
       
     
     }
     
   }
   
-//  boolean wfCollision(PVector _pos)
-//  {
-//    
-//    if( collisionMap[ int( height * _pos.x + _pos.y) ] > 0)
-//    {
-//      return true;
-//    }
-//    return false;
-//  
-//  }
-  
+
+  //deprecated at this point
+  //really good idea for efficant collision lookup
+  //bad use case
   int wfCollision(PVector _pos)
   {
-    //println(_pos);
-    
-    //if(_pos.x >=width || _pos.x <= 0 || _pos.y >= height || _pos.y <= 0) return 0;
-    
+     
     int index = int( height * _pos.x + _pos.y);
     if(index > collisionMap.length-1 || index < 0)return 0;
     
@@ -107,9 +92,6 @@ class WeaponFireManager
     }catch(ArrayIndexOutOfBoundsException e)
     {
       println("bad index: " + index);
-    }finally
-    {
-    //return 0;
     }
     return 0;
   }

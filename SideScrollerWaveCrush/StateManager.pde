@@ -23,6 +23,20 @@ class StateManager
       break;//end starting
 
       case MENU:
+        stateManagerEventHandler();
+        
+        BM.doStaticBackground();
+        ellipse(mouseX,mouseY,10,10);
+        
+        
+        pushStyle();
+        textSize(40);
+        textAlign(CENTER);
+        text("Play", width/2,(height/2) - 100);
+        text("Options", width/2,(height/2) - 0);
+        text("Quit", width/2,(height/2) + 100);
+        popStyle();
+        
       
       break;//end menu
       
@@ -31,7 +45,9 @@ class StateManager
       break;//end demo
       
       case PLAY:
-      
+
+        stateManagerEventHandler();
+        
         //draw background
         BM.draw();
   
@@ -133,6 +149,12 @@ class StateManager
   {
   
     state = s;
+  }
+  
+  void stateManagerEventHandler()
+  {
+        if(keyPressed && key =='p') state = Status.PLAY;
+        if(keyPressed && key =='m') state = Status.MENU;
   }
 
 

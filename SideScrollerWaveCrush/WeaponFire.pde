@@ -16,7 +16,8 @@ class WeaponFire
   int lifeSpan;//how long will this object live
   int lifeStart;
   
-  
+  int colisionAnimationTimeLimit;
+  int colisionTimer;
   
   WeaponFire(float _x, float _y)
   {
@@ -39,8 +40,8 @@ class WeaponFire
     lifeSpan = 300;
     lifeStart = millis();
     
-   
-    
+    colisionAnimationTimeLimit =30;
+    colisionTimer = 0;
   } 
   
   WeaponFire(float _x, float _y, PVector _target, int _damage)
@@ -67,6 +68,9 @@ class WeaponFire
     updateTarget(_target);
     
     damage = _damage;
+    
+    colisionAnimationTimeLimit = 30;
+    colisionTimer = 0;
     
   }   
   
@@ -135,15 +139,21 @@ class WeaponFire
     
     //posX = Elastic.easeInOut(time, beginningVec.x, changeVec.x, duration );
     //posY = Elastic.easeInOut(time, beginningVec.y, changeVec.y, duration );
-    
-    
-    
+  
+  }
+
+  //action to be preformed when weaponFire collides with actors
+  void doCollion()
+  {
+    //push event at this position to sprite effect manager list
+    //play sound
     
     
   }  
   
   void draw()
   {
+    PVector prevPos = getCenter();
     updatePosition();
     
     fill(255);
@@ -164,7 +174,20 @@ class WeaponFire
     
     stroke(230,10,70,100);
     strokeWeight(10);
-    line(posX,posY,posX+50,posY);
+    //todo: rotate weapon fire based on angle
+    pushMatrix();
+      //translate(posX,posY);
+      translate(posX - actorW/2, posY - actorH/2);
+      float a = atan2(posY - prevPos.y, posX - prevPos.x);
+      //float a = atan2( posX - prevPos.x, posY - prevPos.y);
+      
+      rotate(a);
+      //rect(0,0,100,100);
+      //line(posX,posY,posX+50,posY);
+      line(0,0,50,0);
+      
+      translate(0,0);
+    popMatrix();
     
     popStyle();
     
