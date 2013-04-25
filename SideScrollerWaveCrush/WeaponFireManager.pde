@@ -52,21 +52,29 @@ class WeaponFireManager
       
       if( !wp.isAlive())
       {
-      weaponFireCollection.remove(i);
+        weaponFireCollection.remove(i);
         continue;
       }
+      
+      boolean foundCollision = false;
       
       for(int j = 0 ; j < aList.size() ; j++)
       {
           EnemyType1 ai = (EnemyType1)aList.get(j);
-          if(ai.collisionCheck(wp.posX, wp.posY , ai.getRadius() ))
+          if(ai.collisionCheck(wp.posX, wp.posY , ai.getRadius() ) )
           {
           weaponFireCollection.remove(i);
+          
+          if( !ai.takeDamage( wp.damage ) )ai.doCollision();
+          
+          
           println("removed at: " +millis());
+          foundCollision = true;
           break;
           }
           
       }
+      //if(foundCollision)continue;
       
       
     

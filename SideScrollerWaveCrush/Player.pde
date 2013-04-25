@@ -68,7 +68,7 @@ class Player extends Actor
     if(!super.addWeponFire())return false;
     
     PVector pos = getCenter();
-    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2), pos.y + (actorH/2), new PVector(width, pos.y + (actorH/2)), 10  ) );
+    wfm.addWeponFire(new WeaponFire( pos.x + (actorW/2) + 10, pos.y + (actorH/2), new PVector(width, pos.y + (actorH/2)), 10  ) );
     
     return true;
   }

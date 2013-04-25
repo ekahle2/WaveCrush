@@ -118,11 +118,11 @@ void keyPressed()
 
 void keyReleased()
 {
-    if (keyCode == LEFT) {
-      dPadMovement[0] = false;
-    }
     if (keyCode == RIGHT) {
       dPadMovement[1] = false;
+    }
+    if (keyCode == LEFT) {
+      dPadMovement[0] = false;
     }
     if (keyCode == UP) {
       dPadMovement[2] = false;

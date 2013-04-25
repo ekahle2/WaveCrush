@@ -101,7 +101,7 @@ class EnemyType1 extends Actor
 //    fill(200,100);
 //    ellipse(posX,posY,50,50);
 //    popStyle();
-    if((actorCurrentHealth > 0))image(EnemyType1Img, int(posX - (EnemyType1Img.width/2) ), int(posY- (EnemyType1Img.height/2) ) );
+    if( !hasCollided )image(EnemyType1Img, int(posX - (EnemyType1Img.width/2) ), int(posY- (EnemyType1Img.height/2) ) );
     
     popStyle();
 

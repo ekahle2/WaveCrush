@@ -227,39 +227,20 @@ class Actor
 //    fill(200,100);
 //    ellipse(posX,posY,50,50);
 //    popStyle();    
-    boolean isHit = false;
-    for(int i = (int)(posX - (actorW/2) ) ; i <= (int)(posX + (actorW/2) ) ; i++)
-    {
-      if(hasCollided ||isHit)break;
-      for(int j = (int)(posY- (actorH/2) ) ; j <= (int)(posY + (actorH/2) ) ; j++)
-      {
-        if(hasCollided ||isHit)break;
-        lookup.set(j,i,0);
-        if( wfm.wfCollision( lookup ) > 0 )
-        {
-          //hasCollided = true;
-          actorCurrentHealth -=wfm.wfCollision( lookup );
-          println("hit, health@ " + actorCurrentHealth );
-          doCollision(i,j);
-          if(actorCurrentHealth <=0){
-            
-            println();
-          }
-//          
-//          //doCollision(i,j);
-//          println("hit: " + millis());
-//        
-//          
-//          isHit = true;
-//          println(actorHealth + " " + actorCurrentHealth);
-//
-//          
-          
-        }
-        
-      }
-      
-    }
+    
+//    for(int i = (int)(posX - (actorW/2) ) ; i <= (int)(posX + (actorW/2) ) ; i++)
+//    {
+//      if(hasCollided)break;
+//      for(int j = (int)(posY- (actorH/2) ) ; j <= (int)(posY + (actorH/2) ) ; j++)
+//      {
+//        if(hasCollided)break;
+//        lookup.set(j,i,0);
+//        if( wfm.wfCollision( lookup ) > 0 )
+//        {
+//          doCollision(i,j);
+//        }
+//      }
+//    }
     
     if(hasCollided)
     {
@@ -315,6 +296,15 @@ class Actor
     
     actorCurrentHealth = actorHealth;
   } 
+  
+  boolean takeDamage(int incomingDamage)
+  {
+    actorCurrentHealth = actorCurrentHealth - incomingDamage;
+    
+    if(actorCurrentHealth<=0)return false;
+    return true;
+    
+  }
   
   boolean addWeponFire()
   {

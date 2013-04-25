@@ -105,6 +105,7 @@ class StateManager
   //wrapper for player movment
   void doPlayerMovement()
   {
+      //println(dPadMovement[0] + " " + dPadMovement[1] + " " + dPadMovement[2] + " " + dPadMovement[3] + " " + dPadMovement[4]);
       if (dPadMovement[0]) {
           a.moveLeft();
       }
