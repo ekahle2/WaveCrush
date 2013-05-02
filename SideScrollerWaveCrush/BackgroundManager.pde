@@ -59,9 +59,10 @@ class BackgroundManager
   
   void updateL1Background()
   {
-    
-    L1OffsetA-=.5;
-    L1OffsetB-=.5;
+    if(stateManager.state == Status.PLAY){
+      L1OffsetA-=.5;
+      L1OffsetB-=.5;
+    }
     
     if(L1OffsetA < -L1buffer.width) L1OffsetA = width;   
     if(L1OffsetB < -L1buffer.width) L1OffsetB = width;

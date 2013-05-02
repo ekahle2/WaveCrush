@@ -33,6 +33,10 @@ boolean[] dPadMovement = new boolean[5];  //collection to manager simultanious k
 
 StateManager stateManager;          //state manager object
 
+Menu mainMenu;
+
+PFont debugFont;
+
 /*
   global setup method
 */
@@ -67,6 +71,9 @@ void setup()
   
   stateManager = new StateManager();
 
+  mainMenu = new Menu();
+
+  debugFont = createFont("Arial", 10);
 
 }
 
@@ -108,6 +115,15 @@ void keyPressed()
       dPadMovement[4] = true;
   
   
+    }
+    
+    if(stateManager.state == Status.PLAY){
+      
+      if(keyCode == ENTER) stateManager.togglePauseMenu();
+    }else if(stateManager.state == Status.MENU){
+      if(keyCode == DOWN  ) mainMenu.nextSelection();
+      if(keyCode == UP) mainMenu.previousSelection();
+      if(keyCode == ENTER) mainMenu.makeSelection();
     }
 
 }
